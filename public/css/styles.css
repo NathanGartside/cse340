@@ -4,3 +4,44 @@
 *:after {
   box-sizing: border-box;
 }
+
+.background {
+  display: none;
+}
+
+header a {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+}
+
+.siteName {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 3em;
+}
+
+nav li {
+  list-style-type: none;
+  font-size: 1.2em;
+  color: white;
+}
+
+nav ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: black;
+  height: 3em;
+  margin: 0;
+  align-items: center;
+}
