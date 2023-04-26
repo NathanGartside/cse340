@@ -178,4 +178,8 @@ nav ul {
     width: 95%;
     margin: auto;
   }
+
+  .review {
+    margin-bottom: 20px;
+  }
 }
