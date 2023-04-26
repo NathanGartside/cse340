@@ -45,3 +45,66 @@ nav ul {
   margin: 0;
   align-items: center;
 }
+
+.hero_div {
+  display: grid;
+  grid-template-columns: 190px auto;
+  width: 100%;
+}
+
+.hero_pro {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  background: rgba(255, 255, 255, 0.753);
+  color: #20b9d6;
+  height: 6auto;
+}
+
+.hero_button {
+  width: 80%;
+}
+
+.hero_img {
+  grid-column: 1/3;
+  grid-row: 1/3;
+  z-index: -1;
+  width: 480px;
+}
+
+.hero_title {
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 3px;
+}
+
+.hero_p {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+.upgrade_div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+}
+
+.upgrade_title {
+  grid-column: 1/3;
+  margin-right: auto;
+}
+
+.upgrade_img_container {
+  background-color: #01b0d3;
+  text-align: center;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+}
+
+.upgrade_img {
+  margin: auto;
+}
