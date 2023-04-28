@@ -48,8 +48,9 @@ nav ul {
 
 .hero_div {
   display: grid;
-  grid-template-columns: 190px auto;
-  width: 100%;
+  grid-template-columns: 190px 290px;
+  width: 480px;
+  margin: auto;
 }
 
 .hero_pro {
