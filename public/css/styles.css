@@ -58,7 +58,6 @@ nav ul {
   grid-row: 1/2;
   background: rgba(255, 255, 255, 0.753);
   color: #20b9d6;
-  height: 6auto;
   z-index: 2;
 }
 
