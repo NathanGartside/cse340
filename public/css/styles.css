@@ -163,6 +163,9 @@ nav ul {
 
   .main_title {
     zoom: 80%;
+    width: 95%;
+    margin: auto;
+    margin-top: 5px;
   }
 
   footer {
@@ -181,5 +184,13 @@ nav ul {
 
   .review {
     margin-bottom: 20px;
+  }
+
+  .upgrade_title {
+    margin-left: 5%;
+  }
+
+  .review_title {
+    margin-left: 5%;
   }
 }
