@@ -10,7 +10,7 @@ const express = require("express")
 const env = require("dotenv").config()
 const app = express()
 expressLayouts = require("express-ejs-layouts")
-const baseController = require("./controllers/baseController")
+const baseController = require("./controllers//baseController")
 
 /* ***********************
  * Routes
