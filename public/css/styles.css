@@ -34,6 +34,9 @@ nav li {
   list-style-type: none;
   font-size: 1.2em;
   color: white;
+  width: 80px;
+  height: 30px;
+  text-align: center;
 }
 
 nav ul {
@@ -110,6 +113,24 @@ nav ul {
   margin: auto;
 }
 
+nav a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  padding-top: 5px;
+}
+
+nav a:visited {
+  color: white;
+}
+
+nav a:hover {
+  color: black;
+  background-color: white;
+}
+
 @media screen and (min-width: 1200px){
   body {
     background-image: url('../images/site/checkerboard.jpg');
@@ -122,7 +143,6 @@ nav ul {
     margin-top: 10px;
     border-style: solid;
     border-color: #01b0d3;
-    height: 700px;
     border-radius: 5px;
   }
 
