@@ -57,4 +57,17 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+Util.buildInventoryInfo = async function(data) {
+  car = data[0];
+  return `<h1 class='carTitle'>${car.inv_year} ${car.inv_make} ${car.inv_model}</h1>
+  <div class='carInfo'>
+    <img src="${car.inv_image}" alt='${car.inv_year} ${car.inv_make} ${car.inv_model}'>
+    <h4>${car.inv_make} ${car.inv_model} Details</h4>
+    <h4>Price: $${new Intl.NumberFormat('en-US').format(car.inv_price)}</h4>
+    <p><h4>Description:</h4> ${car.inv_description}</p>
+    <p><h4>Color:</h4> ${car.inv_color}</p>
+    <p><h4>Miles:</h4> ${new Intl.NumberFormat('en-US').format(car.inv_miles)}</p>
+  </div>`
+}
+
 module.exports = Util
