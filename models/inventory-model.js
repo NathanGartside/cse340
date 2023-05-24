@@ -33,7 +33,7 @@ async function getInventoryByCarId(car_id) {
       "SELECT * FROM public.inventory WHERE inv_id = $1",
       [car_id]
     )
-    return data.rows
+    return data.rows[0]
   } catch (error) {
     console.error("getInventoryByCarId error " + error)
   }

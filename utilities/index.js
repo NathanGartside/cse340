@@ -58,7 +58,7 @@ Util.buildClassificationGrid = async function(data){
 }
 
 Util.buildInventoryInfo = async function(data) {
-  car = data[0];
+  car = data;
   return `<div class='carInfo'>
     <img src="${car.inv_image}" alt='${car.inv_year} ${car.inv_make} ${car.inv_model}'>
     <h4>${car.inv_make} ${car.inv_model} Details</h4>
