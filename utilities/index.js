@@ -60,12 +60,12 @@ Util.buildClassificationGrid = async function(data){
 Util.buildInventoryInfo = async function(data) {
   car = data;
   return `<div class='carInfo'>
-    <img src="${car.inv_image}" alt='${car.inv_year} ${car.inv_make} ${car.inv_model}'>
-    <h4>${car.inv_make} ${car.inv_model} Details</h4>
-    <h4>Price: $${new Intl.NumberFormat('en-US').format(car.inv_price)}</h4>
-    <p><h4>Description:</h4> ${car.inv_description}</p>
-    <p><h4>Color:</h4> ${car.inv_color}</p>
-    <p><h4>Miles:</h4> ${new Intl.NumberFormat('en-US').format(car.inv_miles)}</p>
+    <img class='carImg' src="${car.inv_image}" alt='${car.inv_year} ${car.inv_make} ${car.inv_model}'>
+    <h4 class='carDetails'>${car.inv_make} ${car.inv_model} Details</h4>
+    <div><h4 class='carPrice'>Price: $${new Intl.NumberFormat('en-US').format(car.inv_price)}</h4></div>
+    <div><p class='carDesc'><span>Description:</span> ${car.inv_description}</p></div>
+    <div><p class='carColor'><span>Color:</span> ${car.inv_color}</p></div>
+    <div><p class='carMiles'><span>Miles:</span> ${new Intl.NumberFormat('en-US').format(car.inv_miles)}</p></div>
   </div>`
 }
 

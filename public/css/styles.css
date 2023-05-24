@@ -168,6 +168,33 @@ nav a:hover {
   font-size: .8em;
 }
 
+.carInfo h4 {
+  margin-bottom: 0;
+}
+
+.carInfo div p, .carInfo div h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.carInfo div:nth-child(odd) {
+  background-color: #f7f6f7;
+}
+
+.carImg {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.carInfo span {
+  font-weight: bold;
+}
+
+.carInfo span {
+  font-weight: bold;
+}
+
 @media screen and (min-width: 1200px){
   body {
     background-image: url('../images/site/checkerboard.jpg');
@@ -250,4 +277,14 @@ nav a:hover {
   .review_title {
     margin-left: 5%;
   }
+
+  .carInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .carImg {
+    grid-row: 1/6;
+  }
+
 }
