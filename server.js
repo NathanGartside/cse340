@@ -38,7 +38,7 @@ app.use(function(req, res, next){
 })
 
 /* ***********************
- * Routes
+ * View Engine and Templates
  *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
