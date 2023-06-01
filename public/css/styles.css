@@ -217,10 +217,13 @@ nav a:hover {
 }
 
 .signUpForm button {
-  margin-left: 140px;
-  width: 70px;
+  display: block;
+  margin: 0 auto;
+  width: 80px;
   height: 30px;
   border-radius: 15px;
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .signUpForm p {
@@ -234,6 +237,10 @@ nav a:hover {
 
 .signUpForm a:visited {
   color: white;
+}
+
+.signUpForm p {
+  margin-left: 10px;
 }
 
 .registerForm {
@@ -258,9 +265,31 @@ nav a:hover {
 }
 
 .registerForm button {
-  margin-left: 140px;
-  width: 70px;
+  display: block;
+  margin: 0 auto;
+  width: 80px;
   height: 30px;
+  border-radius: 15px;
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.registerForm p {
+  margin-left: 10px;
+}
+
+.passwordToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 30px;
+  background-color: white;
+  color: black;
+  margin: 10px auto;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
   border-radius: 15px;
 }
 
