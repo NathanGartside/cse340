@@ -293,6 +293,14 @@ nav a:hover {
   border-radius: 15px;
 }
 
+input:required:invalid, input:focus:invalid {
+  border-color: red;
+ }
+
+ input:required:valid {
+  border-color: green;
+ }
+
 @media screen and (min-width: 1200px){
   body {
     background-image: url('../images/site/checkerboard.jpg');
