@@ -35,5 +35,13 @@ invCont.buildByCarId = async function (req, res, next) {
   })
 }
 
+invCont.buildMangement = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: 'Vehicle Management',
+    nav,
+  })
+}
+
 
 module.exports = invCont
