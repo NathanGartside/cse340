@@ -64,7 +64,7 @@ invCont.buildAddCar = async function (req, res, next) {
 }
 
 /* ****************************************
-*  Process Registration
+*  Process New Classification
 * *************************************** */
 invCont.addNewClass = async function(req, res) {
   let nav = await utilities.getNav()
@@ -85,12 +85,43 @@ invCont.addNewClass = async function(req, res) {
     })
   } else {
     req.flash("notice", "Sorry, we could not add the classification.")
-    res.status(501).render("inventory/add-classificationr", {
+    res.status(501).render("inventory/add-classification", {
       title: "Add New Classification",
       nav,
     })
   }
 }
 
+/* ****************************************
+*  Process New Car
+* *************************************** */
+invCont.addNewCar = async function(req, res) {
+  let nav = await utilities.getNav()
+  let dropDown = await utilities.getDropDown()
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
+
+  const newCarResults = await invModel.newInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+
+  if(newCarResults) {
+    nav = await utilities.getNav()
+    req.flash(
+      "notice",
+      `Congratulations, you\'re added ${inv_year} ${inv_make} ${inv_model}.`
+    )
+    res.status(201).render("inventory/add-inventory", {
+      title: "Add New Inventory",
+      nav,
+      dropDown,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, we could not add the car.")
+    res.status(501).render("inventory/add-inventory", {
+      title: "Add New Inventory",
+      nav,
+      dropDown,
+    })
+  }
+}
 
 module.exports = invCont
