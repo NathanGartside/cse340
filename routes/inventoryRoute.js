@@ -9,6 +9,7 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:carId", utilities.handleErrors(invController.buildByCarId));
 router.get("/management", utilities.handleErrors(invController.buildMangement));
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddCar));
 
 router.post("/add-classification", regValidate.classificationRules(), regValidate.checkNewClassData, utilities.handleErrors(invController.addNewClass));
 

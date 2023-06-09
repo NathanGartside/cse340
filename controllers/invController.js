@@ -52,6 +52,17 @@ invCont.buildAddClassification = async function (req, res, next) {
   })
 }
 
+invCont.buildAddCar = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let dropDown = await utilities.getDropDown()
+  res.render("./inventory/add-inventory", {
+    title: 'Add New Car',
+    nav,
+    errors: null,
+    dropDown,
+  })
+}
+
 /* ****************************************
 *  Process Registration
 * *************************************** */
