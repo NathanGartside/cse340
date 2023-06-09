@@ -12,3 +12,9 @@ if(button) {
         }
     })
 }
+
+let p = document.querySelector('.dropDown')
+if(p.textContent) {
+    console.log('test')
+    document.getElementById(`${p.textContent}`).selected = true;
+}

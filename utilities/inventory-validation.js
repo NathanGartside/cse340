@@ -54,7 +54,7 @@ validate.inventoryRules = () => {
       body("inv_thumbnail")
       .trim()
       .custom((inv_thumbnail) => {
-        if(inv_thumbnail!='/images/vehicles/no-image-tin.png') {
+        if(inv_thumbnail!='/images/vehicles/no-image-tn.png') {
           throw new Error('Please provide a valid thumbnail')
         } else {
           return true
@@ -103,7 +103,6 @@ validate.checkNewCarData = async (req, res, next) => {
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
   let errors = []
   errors = validationResult(req)
-  console.log(errors)
   if(!errors.isEmpty())
   {
       let nav = await utilities.getNav()

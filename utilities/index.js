@@ -76,7 +76,7 @@ Util.getDropDown = async function (req, res, next) {
   let data = await invModel.getClassifications()
   let list = '<select id="classification_id" name="classification_id">'
   data.rows.forEach((row) => {
-    list += `<option value=${row.classification_id}>${row.classification_name}</option>`
+    list += `<option id="${row.classification_id}"value="${row.classification_id}">${row.classification_name}</option>`
   })
   list += "</select>"
   return list
