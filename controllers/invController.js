@@ -78,8 +78,8 @@ invCont.addNewClass = async function(req, res) {
       "notice",
       `Congratulations, you\'re added ${classification_name}.`
     )
-    res.status(201).render("inventory/add-classification", {
-      title: "Add New Classification",
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
       nav,
       errors: null,
     })
@@ -108,10 +108,9 @@ invCont.addNewCar = async function(req, res) {
       "notice",
       `Congratulations, you\'re added ${inv_year} ${inv_make} ${inv_model}.`
     )
-    res.status(201).render("inventory/add-inventory", {
-      title: "Add New Inventory",
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
       nav,
-      dropDown,
       errors: null,
     })
   } else {
