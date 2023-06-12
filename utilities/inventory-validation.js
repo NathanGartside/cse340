@@ -26,10 +26,11 @@ validate.inventoryRules = () => {
       .isAlpha()
       .withMessage('Please provide a valid model'),
 
-      //inv_year is required and must be only numbers
+      //inv_year is required and must be only numbers, add length = 4
       body("inv_year")
       .trim()
       .isNumeric()
+      .isLength({ min: 4, max: 4 })
       .withMessage('Please provide a valid year'),
 
       //inv_description is required
@@ -106,7 +107,7 @@ validate.checkNewCarData = async (req, res, next) => {
   if(!errors.isEmpty())
   {
       let nav = await utilities.getNav()
-      let dropDown = await utilities.getDropDown()
+      let dropDown = await utilities.getDropDown(classification_id)
       res.render("inventory/add-inventory", {
         errors,
         title: "Add New Inventory",

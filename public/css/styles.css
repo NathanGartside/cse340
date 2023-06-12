@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+#wrapper {
+  width: 100%;
+}
+
 .background {
   display: none;
 }
@@ -44,9 +48,11 @@ nav ul {
   display: flex;
   justify-content: space-evenly;
   background-color: black;
-  height: 3em;
+  min-height: 3em;
   margin: 0;
   align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
 .hero_div {
@@ -111,6 +117,10 @@ nav ul {
 
 .upgrade_img {
   margin: auto;
+}
+
+nav {
+  width: 100%;
 }
 
 nav a {
@@ -197,6 +207,8 @@ nav a:hover {
 
 .signUpForm {
   width: 400px;
+  font-size: 2em;
+  max-width: 100%;
   margin: 0 auto;
   padding: 10px;
   border-style: solid;
@@ -245,6 +257,8 @@ nav a:hover {
 
 .registerForm {
   width: 400px;
+  font-size: 2em;
+  max-width: 100%;
   margin: 0 auto;
   padding: 10px;
   border-style: solid;
@@ -260,8 +274,20 @@ nav a:hover {
   border-radius: 5px;
 }
 
+input {
+  width: 90%;
+  height: 45px;
+  font-size: 1.2em;
+}
+
 .registerForm label {
   margin: 10px;
+}
+
+select {
+  width: 100px;
+  height: 30px;
+  font-size: .7em;
 }
 
 .registerForm button {
@@ -279,6 +305,7 @@ nav a:hover {
 }
 
 .passwordToggle {
+  font-size: .5em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,6 +342,8 @@ input:required:valid {
 
 .classForm {
   width: 400px;
+  font-size: 2em;
+  max-width: 100%;
   margin: 0 auto;
   padding: 10px;
   border-style: solid;
@@ -340,6 +369,8 @@ input:required:valid {
 
 .carForm {
   width: 400px;
+  font-size: 2em;
+  max-width: 100%;
   margin: 0 auto;
   padding: 10px;
   border-style: solid;
@@ -366,6 +397,22 @@ input:required:valid {
 @media screen and (min-width: 1200px){
   body {
     background-image: url('../images/site/checkerboard.jpg');
+  }
+
+  #wrapper form {
+    font-size: 1em;
+  }
+
+  select {
+    width: auto;
+    height: auto;
+    font-size: .7em;
+  }
+
+  input {
+    width: 90%;
+    height: 16px;
+    font-size: .83em;
   }
 
   #wrapper {

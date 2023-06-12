@@ -114,6 +114,7 @@ invCont.addNewCar = async function(req, res) {
       errors: null,
     })
   } else {
+    let dropDown = await utilities.getDropDown(classification_id)
     req.flash("notice", "Sorry, we could not add the car.")
     res.status(501).render("inventory/add-inventory", {
       title: "Add New Inventory",
