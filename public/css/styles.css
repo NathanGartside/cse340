@@ -403,6 +403,10 @@ input:required:valid {
     font-size: 1em;
   }
 
+  .passwordToggle {
+    font-size: 1em;
+  }
+
   select {
     width: auto;
     height: auto;
