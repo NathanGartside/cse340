@@ -380,6 +380,31 @@ input:required:valid {
   border-radius: 5px;
 }
 
+.inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.inventoryDisplay tbody tr:nth-child(odd){
+  background-color: black;
+  color: white;
+}
+
+
+.inventoryDisplay tbody {
+  border: 1px solid black;
+}
+
+.inventoryDisplay tbody td{
+  border: 1px solid black;
+  width: 33%;
+}
+
+.inventoryDisplay a{
+  color: inherit;
+}
+
 .carForm button {
   display: block;
   margin: 0 auto;

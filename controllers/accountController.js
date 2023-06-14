@@ -106,9 +106,9 @@ async function accountLogin(req, res) {
 }
 
 /* ****************************************
-*  Deliver successful login view
+*  Deliver account management view
 * *************************************** */
-async function buildSuccessfulLogin(req, res, next) {
+async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav()
   res.render("./account/logged-in", {
     title: "Account Management",
@@ -117,4 +117,4 @@ async function buildSuccessfulLogin(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildSuccessfulLogin }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
