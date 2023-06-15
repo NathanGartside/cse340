@@ -116,7 +116,7 @@ invCont.addNewCar = async function(req, res) {
     nav = await utilities.getNav()
     req.flash(
       "notice",
-      `Congratulations, you\'re added ${inv_year} ${inv_make} ${inv_model}.`
+      `Congratulations, you\'ve added ${inv_year} ${inv_make} ${inv_model}.`
     )
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
@@ -173,6 +173,46 @@ invCont.buildEditInventory = async function(req, res) {
     inv_color: data.inv_color,
     classification_id: data.classification_id
   })
+}
+
+/* ****************************************
+*  Update Car Data
+* *************************************** */
+invCont.updateCar = async function(req, res) {
+  let nav = await utilities.getNav()
+  const { inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
+
+  const updatedResults = await invModel.updateInventory(inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+
+  if(updatedResults) {
+    nav = await utilities.getNav()
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve updated ${inv_year} ${inv_make} ${inv_model}.`
+    )
+    res.redirect('/inv/')
+  } else {
+    let dropDown = await utilities.getDropDown(classification_id)
+    const name = `${data.inv_make} ${data.inv_model}`
+    req.flash("notice", "Sorry, we could not update the car.")
+    res.status(501).render("inventory/edit-inventory", {
+      title: "Edit " + name,
+      nav,
+      dropDown,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    })
+  }
 }
 
 module.exports = invCont

@@ -408,7 +408,7 @@ input:required:valid {
 .carForm button {
   display: block;
   margin: 0 auto;
-  width: 80px;
+  width: 100px;
   height: 30px;
   border-radius: 15px;
   background-color: white;

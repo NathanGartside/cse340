@@ -22,5 +22,7 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 router.post("/add-classification", regValidate.classificationRules(), regValidate.checkNewClassData, utilities.handleErrors(invController.addNewClass));
 // Route to add the new car data
 router.post("/add-inventory", regValidate.inventoryRules(), regValidate.checkNewCarData, utilities.handleErrors(invController.addNewCar));
+// Route to edit car data
+router.post("/update/", regValidate.inventoryRules(), regValidate.checkUpdatedCarData, utilities.handleErrors(invController.updateCar))
 
 module.exports = router;

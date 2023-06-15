@@ -2,6 +2,7 @@ const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 const validate = {}
 
+//Set the classification rules
 validate.classificationRules = () => {
     return [
         //classification_name is required and must be only letters
@@ -12,6 +13,7 @@ validate.classificationRules = () => {
     ]
 }
 
+//Set the inventory Rules
 validate.inventoryRules = () => {
   return [
       //inv_make is required and must be only letters or spaces
@@ -82,6 +84,7 @@ validate.inventoryRules = () => {
   ]
 }
 
+//Check the new class data
 validate.checkNewClassData = async (req, res, next) => {
     const { classification_name } = req.body
     let errors = []
@@ -100,6 +103,7 @@ validate.checkNewClassData = async (req, res, next) => {
       next()
 }
 
+//Check the new car data
 validate.checkNewCarData = async (req, res, next) => {
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
   let errors = []
@@ -113,6 +117,38 @@ validate.checkNewCarData = async (req, res, next) => {
         title: "Add New Inventory",
         nav,
         dropDown,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+      })
+      return
+    }
+    next()
+}
+
+//Check the updated car data
+validate.checkUpdatedCarData = async (req, res, next) => {
+  const { inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+  let errors = []
+  errors = validationResult(req)
+  const name = `${inv_make} ${inv_model}`
+  if(!errors.isEmpty())
+  {
+      let nav = await utilities.getNav()
+      let dropDown = await utilities.getDropDown(classification_id)
+      res.render("inventory/edit-inventory", {
+        errors,
+        title: "Edit " + name,
+        nav,
+        dropDown,
+        inv_id,
         inv_make,
         inv_model,
         inv_year,
