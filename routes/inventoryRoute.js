@@ -14,6 +14,8 @@ router.get("/", utilities.handleErrors(invController.buildMangement));
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
 // Route to build the add car view
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddCar));
+// Route to build the edit data view
+router.get('/edit/:carId', utilities.handleErrors(invController.buildEditInventory));
 // Route to return classification data as JSON
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 // Route to add the new classification data

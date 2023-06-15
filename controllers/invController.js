@@ -108,7 +108,6 @@ invCont.addNewClass = async function(req, res) {
 * *************************************** */
 invCont.addNewCar = async function(req, res) {
   let nav = await utilities.getNav()
-  let dropDown = await utilities.getDropDown()
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body;
 
   const newCarResults = await invModel.newInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
@@ -146,6 +145,34 @@ invCont.getInventoryJSON = async (req, res, next) => {
   } else {
     next(new Error("No data returned"))
   }
+}
+
+/* ****************************************
+*  Edit car
+* *************************************** */
+invCont.buildEditInventory = async function(req, res) {
+  const car_id = parseInt(req.params.carId);
+  let nav = await utilities.getNav()
+  const data = await invModel.getInventoryByCarId(car_id);
+  let dropDown = await utilities.getDropDown(data.classification_id)
+  const name = `${data.inv_make} ${data.inv_model}`
+  res.render("./inventory/edit-inventory", {
+    title: "Edit " + name,
+    nav,
+    dropDown: dropDown,
+    errors: null,
+    inv_id: data.inv_id,
+    inv_make: data.inv_make,
+    inv_model: data.inv_model,
+    inv_year: data.inv_year,
+    inv_description: data.inv_description,
+    inv_image: data.inv_image,
+    inv_thumbnail: data.inv_thumbnail,
+    inv_price: data.inv_price,
+    inv_miles: data.inv_miles,
+    inv_color: data.inv_color,
+    classification_id: data.classification_id
+  })
 }
 
 module.exports = invCont

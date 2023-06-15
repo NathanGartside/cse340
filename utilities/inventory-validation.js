@@ -14,16 +14,16 @@ validate.classificationRules = () => {
 
 validate.inventoryRules = () => {
   return [
-      //inv_make is required and must be only letters
+      //inv_make is required and must be only letters or spaces
       body("inv_make")
       .trim()
-      .isAlpha()
+      .isAlpha('en-US',{ ignore: ' ' })
       .withMessage('Please provide a valid make'),
 
-      //inv_model is required and must be only letters
+      //inv_model is required and must be only letters or spaces
       body("inv_model")
       .trim()
-      .isAlpha()
+      .isAlpha('en-US',{ ignore: ' ' })
       .withMessage('Please provide a valid model'),
 
       //inv_year is required and must be only numbers, add length = 4
