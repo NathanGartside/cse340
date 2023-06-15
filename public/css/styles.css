@@ -396,7 +396,7 @@ input:required:valid {
   border: 1px solid black;
 }
 
-.inventoryDisplay tbody td{
+.inventoryDisplay tbody tr:nth-child(odd) td{
   border: 1px solid black;
   width: 33%;
 }
