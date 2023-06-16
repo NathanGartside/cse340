@@ -18,11 +18,15 @@ router.get("/add-inventory", utilities.handleErrors(invController.buildAddCar));
 router.get('/edit/:carId', utilities.handleErrors(invController.buildEditInventory));
 // Route to return classification data as JSON
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+// Route to build the delete data view
+router.get('/delete/:carId', utilities.handleErrors(invController.buildDeleteInventory));
 // Route to add the new classification data
 router.post("/add-classification", regValidate.classificationRules(), regValidate.checkNewClassData, utilities.handleErrors(invController.addNewClass));
 // Route to add the new car data
 router.post("/add-inventory", regValidate.inventoryRules(), regValidate.checkNewCarData, utilities.handleErrors(invController.addNewCar));
 // Route to edit car data
 router.post("/update/", regValidate.inventoryRules(), regValidate.checkUpdatedCarData, utilities.handleErrors(invController.updateCar))
+// Route to delete car data
+router.post("/delete/", utilities.handleErrors(invController.deleteCar))
 
 module.exports = router;
