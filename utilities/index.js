@@ -138,4 +138,25 @@ Util.decodeToken = (token) => {
   let base64 = base64Url.replace('-','+').replace('_','/')
   return JSON.parse(atob(base64))
 }
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.loggedin) {
+    let token = req.cookies.jwt
+    user = Util.decodeToken(token)
+    console.log(user)
+    if(user.account_type != 'Client') {
+      next()
+    } else {
+      req.flash("notice", "You don't have clearance to view that page")
+      return res.redirect("/")
+    }
+  } else {
+    req.flash("notice", "You don't have clearance to view that page")
+    return res.redirect("/")
+  }
+}
+
 module.exports = Util
