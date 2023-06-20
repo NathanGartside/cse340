@@ -128,6 +128,14 @@ Util.checkLogin = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+}
 
+/* ****************************************
+ *  Decode token
+ * ************************************ */
+Util.decodeToken = (token) => {
+  let base64Url = token.split('.')[1]
+  let base64 = base64Url.replace('-','+').replace('_','/')
+  return JSON.parse(atob(base64))
+}
 module.exports = Util

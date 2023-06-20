@@ -11,6 +11,8 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 //Route for account management
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
+//Route to logout
+router.get("/logout", utilities.handleErrors(accountController.accountLogout))
 //Route to send registration info
 router.post('/register', regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount))
 // Process the login attempt

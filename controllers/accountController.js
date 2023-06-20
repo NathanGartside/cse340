@@ -117,4 +117,14 @@ async function buildAccountManagement(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
+/* ****************************************
+*  Log out
+* *************************************** */
+async function accountLogout(req, res, next) {
+  let nav = await utilities.getNav()
+  res.clearCookie("jwt")
+  req.flash("notice", "You have successfully logged out")
+  res.redirect("/")
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, accountLogout }
