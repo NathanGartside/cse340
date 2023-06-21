@@ -114,6 +114,7 @@ invCont.addNewCar = async function(req, res) {
 
   if(newCarResults) {
     nav = await utilities.getNav()
+    let dropDown = await utilities.getDropDown(classification_id)
     req.flash(
       "notice",
       `Congratulations, you\'ve added ${inv_year} ${inv_make} ${inv_model}.`
@@ -121,6 +122,7 @@ invCont.addNewCar = async function(req, res) {
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
+      dropDown,
       errors: null,
     })
   } else {

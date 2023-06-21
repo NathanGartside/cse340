@@ -26,7 +26,7 @@
     <label for="inv_price">Price:</label><br>
     <input type="text" name="inv_price" id="inv_price" required pattern="^[0-9.]+$" value="<%= locals.inv_price %>" readonly><br><br>
     <p>Confirm Deletion - The delete is permanent.</p>
-    <button type="submit">Delete Car</button>
+    <button type="submit" class="formButton">Delete Car</button>
 
     <input type="hidden" name="inv_id"
     <% if(locals.inv_id) { %> 

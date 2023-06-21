@@ -4,6 +4,21 @@
 *:after {
   box-sizing: border-box;
 }
+/* Font sizes */
+:root {
+  --ratio: 1.5;
+  --s-5: calc(var(--s-4) / var(--ratio));
+  --s-4: calc(var(--s-3) / var(--ratio));
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+}
 
 #wrapper {
   width: 100%;
@@ -24,7 +39,7 @@ body {
 }
 
 .siteName {
-  font-size: 2em;
+  font-size: var(--s2);
   font-weight: bold;
 }
 
@@ -36,7 +51,7 @@ header {
 
 nav li {
   list-style-type: none;
-  font-size: 1.2em;
+  font-size: var(--s0);
   color: white;
   width: 80px;
   height: 30px;
@@ -82,7 +97,7 @@ nav ul {
 }
 
 .hero_title {
-  font-size: 1.5em;
+  font-size: var(--s2);
   margin-top: 0;
   margin-bottom: 3px;
 }
@@ -175,7 +190,7 @@ nav a:hover {
 }
 
 .namePrice {
-  font-size: .8em;
+  font-size: var(--s0);
 }
 
 .carInfo h4 {
@@ -207,7 +222,7 @@ nav a:hover {
 
 .signUpForm {
   width: 400px;
-  font-size: 2em;
+  font-size: var(--s2);
   max-width: 100%;
   margin: 0 auto;
   padding: 10px;
@@ -228,11 +243,12 @@ nav a:hover {
   margin: 10px;
 }
 
-.signUpForm button {
+.formButton {
   display: block;
   margin: 0 auto;
-  width: 80px;
-  height: 30px;
+  font-size: var(--s1);
+  width: 147px;
+  height: 55px;
   border-radius: 15px;
   background-color: white;
   font-family: 'Courier New', Courier, monospace;
@@ -257,7 +273,7 @@ nav a:hover {
 
 .registerForm {
   width: 400px;
-  font-size: 2em;
+  font-size: var(--s2);
   max-width: 100%;
   margin: 0 auto;
   padding: 10px;
@@ -277,7 +293,7 @@ nav a:hover {
 input {
   width: 90%;
   height: 45px;
-  font-size: 1.2em;
+  font-size: var(--s1);
 }
 
 .registerForm label {
@@ -287,30 +303,21 @@ input {
 select {
   width: 100px;
   height: 30px;
-  font-size: .7em;
+  font-size: var(--s0);
 }
 
-.registerForm button {
-  display: block;
-  margin: 0 auto;
-  width: 80px;
-  height: 30px;
-  border-radius: 15px;
-  background-color: white;
-  font-family: 'Courier New', Courier, monospace;
-}
 
 .registerForm p {
   margin-left: 10px;
 }
 
 .passwordToggle {
-  font-size: .5em;
+  font-size: var(--s1);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 140px;
-  height: 30px;
+  width: 200px;
+  height: 55px;
   background-color: white;
   color: black;
   margin: 10px auto;
@@ -318,6 +325,10 @@ select {
   border-color: black;
   border-width: 1px;
   border-radius: 15px;
+}
+
+.accountForm .formButton{
+  margin-top: 10px;
 }
 
 input:required:invalid, input:focus:invalid, textarea:required:invalid {
@@ -342,7 +353,7 @@ input:required:valid {
 
 .classForm {
   width: 400px;
-  font-size: 2em;
+  font-size: var(--s2);
   max-width: 100%;
   margin: 0 auto;
   padding: 10px;
@@ -353,15 +364,7 @@ input:required:valid {
   border-radius: 5px;
 }
 
-.classForm button {
-  display: block;
-  margin: 0 auto;
-  width: 80px;
-  height: 30px;
-  border-radius: 15px;
-  background-color: white;
-  font-family: 'Courier New', Courier, monospace;
-}
+
 
 .classForm input {
   margin-top: 10px;
@@ -369,7 +372,7 @@ input:required:valid {
 
 .carForm {
   width: 400px;
-  font-size: 2em;
+  font-size: var(--s2);
   max-width: 100%;
   margin: 0 auto;
   padding: 10px;
@@ -405,18 +408,26 @@ input:required:valid {
   color: inherit;
 }
 
-.carForm button {
-  display: block;
-  margin: 0 auto;
-  width: 100px;
-  height: 30px;
-  border-radius: 15px;
-  background-color: white;
-  font-family: 'Courier New', Courier, monospace;
-}
 
 .dropDown {
   display: none;
+}
+
+.form {
+  width: 400px;
+  font-size: var(--s2);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  border-style: solid;
+  border-color: #01b0d3;
+  background-color: #01b0d3;
+  color: white;
+  border-radius: 5px;
+}
+
+.passwordTitle {
+  text-align: center;
 }
 
 @media screen and (min-width: 1200px){
@@ -424,24 +435,32 @@ input:required:valid {
     background-image: url('../images/site/checkerboard.jpg');
   }
 
+  .formButton {
+    font-size: var(--s0);
+    width: 100px;
+    height: 38px;
+  }
+
   #wrapper form {
-    font-size: 1em;
+    font-size: var(--s0);
   }
 
   .passwordToggle {
-    font-size: 1em;
+    font-size: var(--s0);
+    width: 140px;
+    height: 38px;
   }
 
   select {
     width: auto;
     height: auto;
-    font-size: .7em;
+    font-size: var(--s-1);
   }
 
   input {
     width: 90%;
-    height: 16px;
-    font-size: .83em;
+    height: 20px;
+    font-size: var(--s0);
   }
 
   #wrapper {

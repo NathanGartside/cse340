@@ -13,6 +13,8 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
 //Route to logout
 router.get("/logout", utilities.handleErrors(accountController.accountLogout))
+//Route to update account
+router.get("/update-account/:accId", utilities.handleErrors(accountController.buildEditAccount))
 //Route to send registration info
 router.post('/register', regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount))
 // Process the login attempt

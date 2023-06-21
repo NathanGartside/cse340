@@ -146,7 +146,6 @@ Util.checkAccountType = (req, res, next) => {
   if (res.locals.loggedin) {
     let token = req.cookies.jwt
     user = Util.decodeToken(token)
-    console.log(user)
     if(user.account_type != 'Client') {
       next()
     } else {

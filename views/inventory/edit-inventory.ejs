@@ -37,7 +37,7 @@
     <input type="text" name="inv_color" id="inv_color" required pattern="^[a-zA-Z]+$" value="<%= locals.inv_color %>"><br><br>
     <label for="classification_id">Classification:</label><br>
     <%- dropDown %><br><br>
-    <button type="submit" disabled>Update Car</button>
+    <button type="submit" class="formButton" disabled>Update Car</button>
 
     <input type="hidden" name="inv_id"
     <% if(locals.inv_id) { %> 
