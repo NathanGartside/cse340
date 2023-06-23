@@ -41,24 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(cookieParser())
 //Check to see if JWT is valid
 app.use(utilities.checkJWTToken)
-//Allows the logged in check to be used in header
-app.use((req, res, next) => {
-  if(res.locals.loggedin) {
-    res.locals.accountCheck = true
-  } else {
-    res.locals.accountCheck = false
-  }
-  next()
-})
-//Allow the jwt to be used in view
-app.use((req, res, next) => {
-  if(res.locals.loggedin) {
-    let token = req.cookies.jwt
-    res.locals.user = utilities.decodeToken(token)
-  }
 
-  next()
-})
 /* ***********************
  * View Engine and Templates
  *************************/
