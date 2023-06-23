@@ -33,7 +33,7 @@
 <form class="form passwordForm" action="/account/updatePassword" method="post">
     <label for="account_password">Password:</label>
     <input type="password" name="account_password" id="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-    <p>Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.</p>
+    <p>Entering a password will change your current password. Passwords must be a minimum of 12 characters and include 1 capital letter, 1 number, and 1 special character.</p>
     <span class="passwordToggle">Show Password</span>
     <input type="hidden" name="account_id"
     <% if(locals.account_id) { %> 
