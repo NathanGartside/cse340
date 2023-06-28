@@ -98,6 +98,8 @@ async function accountLogin(req, res) {
    delete accountData.account_password
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+   res.locals.accountData = accountData
+   res.locals.loggedin = 1
    return res.redirect("/account/")
    } 
    throw new Error('Password is wrong')
@@ -165,6 +167,11 @@ async function accountUpdate(req, res) {
   )
 
   if (updateResult) {
+    let account_type = res.locals.accountData.account_type
+    let accountData = { account_id: parseInt(account_id), account_firstname, account_lastname, account_email, account_type }
+    res.clearCookie("jwt")
+    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
     req.flash(
       "notice",
       `Congratulations, you\'ve updated your account ${account_firstname} ${account_lastname}.`
@@ -185,7 +192,7 @@ async function accountUpdate(req, res) {
 async function accountPasswordUpdate(req, res) {
   let nav = await utilities.getNav()
   const { account_password, account_id } = req.body
-
+  console.log(account_id)
   // Hash the password before storing
   let hashedPassword
   try {
