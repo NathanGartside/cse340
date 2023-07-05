@@ -152,6 +152,32 @@ async function buildEditAccount(req, res, next) {
 }
 
 /* ****************************************
+*  Deliver messages view
+* *************************************** */
+async function buildMessages(req, res, next) {
+  let nav = await utilities.getNav()
+  const message_from = parseInt(req.params.accId);
+  res.render("account/messages", {
+    title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Inbox`,
+    nav,
+    errors: null,
+    message_from: message_from
+  })
+}
+/* ****************************************
+*  Deliver new message view
+* *************************************** */
+async function buildNewMessage(req, res, next) {
+  let nav = await utilities.getNav()
+  const message_from = parseInt(req.params.accId);
+  res.render("account/send-message", {
+    title: 'New Message',
+    nav,
+    errors: null,
+    message_from: message_from
+  })
+}
+/* ****************************************
 *  Update account info
 * *************************************** */
 async function accountUpdate(req, res) {
@@ -224,4 +250,4 @@ async function accountPasswordUpdate(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage }
