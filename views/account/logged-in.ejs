@@ -24,6 +24,6 @@
 
 <h2>Message Center</h2>
 <ul>
-    <li><p>You have blank unread messages.</p></li>
+    <li><p>You have <%= locals.count %> unread messages.</p></li>
     <li>Go to <a href="/account/messages/<%= locals.accountData.account_id %>">Inbox</a></li>
 </ul>

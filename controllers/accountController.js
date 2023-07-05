@@ -114,10 +114,13 @@ async function accountLogin(req, res) {
 * *************************************** */
 async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav()
+  const messages = await accountModel.getUnreadMessages(res.locals.accountData.account_id)
+  const count = messages.length
   res.render("./account/logged-in", {
     title: "Account Management",
     nav,
     errors: null,
+    count: count,
   })
 }
 
@@ -157,6 +160,8 @@ async function buildEditAccount(req, res, next) {
 async function buildMessages(req, res, next) {
   let nav = await utilities.getNav()
   const message_from = parseInt(req.params.accId);
+  const messages = await accountModel.getUnreadMessages(message_from)
+  console.log(messages)
   res.render("account/messages", {
     title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Inbox`,
     nav,
@@ -177,6 +182,37 @@ async function buildNewMessage(req, res, next) {
     message_from: message_from
   })
 }
+/* ****************************************
+*  Send new message
+* *************************************** */
+async function getNewMessage(req, res) {
+  let nav = await utilities.getNav()
+  const { message_to, message_subject, message_body, message_from } = req.body
+
+  console.log('test')
+  const messageResult = await accountModel.newMessage(
+    message_to,
+    message_subject,
+    message_body, 
+    message_from
+  )
+  console.log('test2')
+  if (messageResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve sent a new message.`
+    )
+    res.redirect(`/account/messages/${message_from}`)
+  } else {
+    req.flash("notice", "Sorry, the  message failed.")
+    res.status(501).render(`/account/messages`, {
+      title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Inbox`,
+      nav,
+      message_from: message_from
+    })
+  }
+}
+
 /* ****************************************
 *  Update account info
 * *************************************** */
@@ -250,4 +286,4 @@ async function accountPasswordUpdate(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage, getNewMessage }

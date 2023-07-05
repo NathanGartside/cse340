@@ -118,6 +118,32 @@ validate.updateAccountRules = () => {
       }),
   ]
 }
+
+/*  **********************************
+ *  New Message Validation Rules
+ * ********************************* */
+validate.newMessageRules = () => {
+  return [
+    // Recipient is required and must be a number
+    body("message_to")
+      .trim()
+      .isNumeric()
+      .withMessage("Please select a recipient."), // on error this message is sent.
+
+    // Subject is required and must be string
+    body("message_subject")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a subject."), // on error this message is sent.
+
+    // Body is required and must be string
+    body("message_body")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a body."), // on error this message is sent.
+  ]
+}
+
   /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
@@ -205,5 +231,27 @@ validate.checkUpdatePasswordData = async (req, res, next) => {
   }
   next()
 }
+
+  /* ******************************
+ * Check data and return errors or continue to sending new message
+ * ***************************** */
+  validate.checkNewMessageData = async (req, res, next) => {
+    const { message_to, message_subject, message_body } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      res.render("account/send-message", {
+        errors,
+        title: "New Message",
+        nav,
+        message_to,
+        message_subject,
+        message_body,
+      })
+      return
+    }
+    next()
+  }
 
 module.exports = validate
