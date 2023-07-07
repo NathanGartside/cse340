@@ -160,13 +160,16 @@ async function buildEditAccount(req, res, next) {
 async function buildMessages(req, res, next) {
   let nav = await utilities.getNav()
   const message_from = parseInt(req.params.accId);
-  const messages = await accountModel.getUnreadMessages(message_from)
-  console.log(messages)
+  const messages = await accountModel.getMessagesAndName(message_from)
+  const archMessages = await accountModel.getArchivedMessages(message_from)
+  const count = archMessages.length
   res.render("account/messages", {
     title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Inbox`,
     nav,
     errors: null,
-    message_from: message_from
+    message_from: message_from,
+    count: count,
+    messagesArray: messages
   })
 }
 /* ****************************************

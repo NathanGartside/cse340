@@ -383,6 +383,17 @@ input:required:valid {
   border-radius: 5px;
 }
 
+.messageDisplay {
+  width: min(100%, 600px);
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.messageDisplay tbody tr:nth-child(odd){
+  background-color: black;
+  color: white;
+}
+
 .inventoryDisplay {
   width: 100%;
   border-collapse: collapse;
@@ -408,6 +419,9 @@ input:required:valid {
   color: inherit;
 }
 
+main {
+  padding: var(--s-2);
+}
 
 .dropDown {
   display: none;

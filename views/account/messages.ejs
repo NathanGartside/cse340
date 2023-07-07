@@ -17,5 +17,29 @@
 
 <ul>
     <li><p><a href="/account/send-message/<%= locals.message_from %>">Create New Message</a></p></li>
-    <li><p><a href="">View 1 Archived Messages</a></p></li>
+    <li><p><a href="">View <%= locals.count %> Archived Messages</a></p></li>
 </ul>
+
+<table id="messageDisplay" class="messageDisplay">
+    <thead>
+        <tr>
+            <th>Received</th>
+            <th>Subject</th>
+            <th>From</th>
+            <th>Read</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% locals.messagesArray.forEach(function (message) { %>
+            <% let date = message.message_created %>
+            <% let ampm = date.getHours() >= 12 ? 'PM' : 'AM'; %>
+            <% let time = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${ampm}` %>
+            <tr>
+                <td><%= time %></td>
+                <td><%= message.message_subject %></td>
+                <td><%= message.message_from_firstname %> <%= message.message_from_lastname %></td>
+                <td><%= message.message_read %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
