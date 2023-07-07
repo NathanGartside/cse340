@@ -97,8 +97,8 @@ async function newMessage(message_to, message_subject, message_body, message_fro
 async function getUnreadMessages (message_to) {
   try {
     const result = await pool.query(
-      'SELECT message_id, message_subject, message_body, message_created, message_to, message_from, message_read, message_archived FROM message WHERE message_to = $1 AND message_read = $2',
-      [message_to, 'false'])
+      'SELECT message_id, message_subject, message_body, message_created, message_to, message_from, message_read, message_archived FROM message WHERE message_to = $1 AND message_read = false',
+      [message_to])
     return result.rows
   } catch (error) {
     return new Error("No matching email found")
