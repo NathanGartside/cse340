@@ -30,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-        <% locals.messagesArray.forEach(function (message) { %>
+        <% locals.messagesArray.findLast(function (message) { %>
             <% let date = message.message_created %>
             <% let ampm = date.getHours() >= 12 ? 'PM' : 'AM'; %>
             <% let time = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${ampm}` %>
