@@ -30,7 +30,11 @@
         <% locals.messagesArray.findLast(function (message) { %>
             <% let date = message.message_created %>
             <% let ampm = date.getHours() >= 12 ? 'PM' : 'AM'; %>
-            <% let time = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${ampm}` %>
+            <% let hour = date.getHours() %>
+            <% if(ampm=='PM') {%>
+                <% hour = hour - 12 %>
+            <% } %>
+            <% let time = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}, ${hour}:${date.getMinutes()}:${date.getSeconds()} ${ampm}` %>
             <tr>
                 <td><%= time %></td>
                 <td><a href='/account/view-message/<%= message.message_id %>'><%= message.message_subject %></a></td>
