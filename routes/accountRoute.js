@@ -18,7 +18,11 @@ router.get("/update-account/:accId", utilities.checkLogin, utilities.handleError
 //Route to messages center
 router.get('/messages/:accId', utilities.checkLogin, utilities.handleErrors(accountController.buildMessages))
 //Route to new message
-router.get('/send-message/:accId', utilities.checkLogin, utilities.handleErrors(accountController.buildNewMessage))
+router.get('/send-message', utilities.checkLogin, utilities.handleErrors(accountController.buildNewMessage))
+//Route to reply to a message
+router.get('/reply-message/:messId', utilities.checkLogin, utilities.handleErrors(accountController.buildReplyMessage))
+//Route to veiw a message
+router.get('/view-message/:messId', utilities.checkLogin, utilities.handleErrors(accountController.buildViewMessage))
 //Route to send registration info
 router.post('/register', regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount))
 // Process the login attempt
@@ -28,6 +32,8 @@ router.post("/updateAccount", utilities.checkLogin, regValidate.updateAccountRul
 //Route to send update info
 router.post("/updatePassword", utilities.checkLogin, regValidate.updateAccountPasswordRules(), regValidate.checkUpdatePasswordData, utilities.handleErrors(accountController.accountPasswordUpdate))
 //Route to send a new message
-router.post('/send_message', utilities.checkLogin, regValidate.newMessageRules(), regValidate.checkNewMessageData, utilities.handleErrors(accountController.getNewMessage) )
+router.post('/send_message', utilities.checkLogin, regValidate.newMessageRules(), regValidate.checkNewMessageData, utilities.handleErrors(accountController.getNewMessage))
+//Route to send a new reply
+router.post('/send_reply', utilities.checkLogin, regValidate.newMessageRules(), regValidate.checkReplyMessageData, utilities.handleErrors(accountController.getNewMessage) )
 
 module.exports = router;

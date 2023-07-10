@@ -177,12 +177,45 @@ async function buildMessages(req, res, next) {
 * *************************************** */
 async function buildNewMessage(req, res, next) {
   let nav = await utilities.getNav()
-  const message_from = parseInt(req.params.accId);
+  const message_from = res.locals.accountData.account_id
   res.render("account/send-message", {
     title: 'New Message',
     nav,
     errors: null,
     message_from: message_from
+  })
+}
+
+/* ****************************************
+*  Deliver reply message view
+* *************************************** */
+async function buildReplyMessage(req, res, next) {
+  let nav = await utilities.getNav()
+  const message_from = res.locals.accountData.account_id
+  const message_id = parseInt(req.params.messId);
+  const message = await accountModel.getMessage(message_id)
+  res.render("account/reply-message", {
+    title: `RE: ${message.message_subject}`,
+    nav,
+    errors: null,
+    message_from: message_from,
+    message_to: message.message_from,
+    message_subject: `RE: ${message.message_subject}`,
+    message_body: `\n\n // Previous Message //\n${message.message_body}`
+  })
+}
+/* ****************************************
+*  Deliver view message view
+* *************************************** */
+async function buildViewMessage(req, res, next) {
+  let nav = await utilities.getNav()
+  const message_id = parseInt(req.params.messId);
+  const message = await accountModel.getMessage(message_id)
+  res.render("account/view-message", {
+    title: message.message_subject,
+    nav,
+    errors: null,
+    message: message
   })
 }
 /* ****************************************
@@ -192,7 +225,6 @@ async function getNewMessage(req, res) {
   let nav = await utilities.getNav()
   const { message_to, message_subject, message_body, message_from } = req.body
 
-  console.log('test')
   const messageResult = await accountModel.newMessage(
     message_to,
     message_subject,
@@ -289,4 +321,6 @@ async function accountPasswordUpdate(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage, getNewMessage }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, 
+  accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage, 
+  getNewMessage, buildViewMessage , buildReplyMessage}

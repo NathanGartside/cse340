@@ -16,7 +16,7 @@
 <% } %>
 
 <ul>
-    <li><p><a href="/account/send-message/<%= locals.message_from %>">Create New Message</a></p></li>
+    <li><p><a href="/account/send-message">Create New Message</a></p></li>
     <li><p><a href="">View <%= locals.count %> Archived Messages</a></p></li>
 </ul>
 
@@ -36,7 +36,7 @@
             <% let time = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${ampm}` %>
             <tr>
                 <td><%= time %></td>
-                <td><%= message.message_subject %></td>
+                <td><a href='/account/view-message/<%= message.message_id %>'><%= message.message_subject %></a></td>
                 <td><%= message.message_from_firstname %> <%= message.message_from_lastname %></td>
                 <td><%= message.message_read %></td>
             </tr>
