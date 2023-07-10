@@ -162,6 +162,7 @@ async function buildMessages(req, res, next) {
   const message_from = parseInt(req.params.accId);
   const messages = await accountModel.getMessagesAndName(message_from)
   const archMessages = await accountModel.getArchivedMessages(message_from)
+  console.log(archMessages)
   const count = archMessages.length
   res.render("account/messages", {
     title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Inbox`,
@@ -170,6 +171,22 @@ async function buildMessages(req, res, next) {
     message_from: message_from,
     count: count,
     messagesArray: messages
+  })
+}
+
+/* ****************************************
+*  Deliver archived messages view
+* *************************************** */
+async function buildArchivedMessages(req, res, next) {
+  let nav = await utilities.getNav()
+  const message_to = parseInt(req.params.accId);
+  const archMessages = await accountModel.getArchivedMessages(message_to)
+  console.log(archMessages)
+  res.render("account/archived-messages", {
+    title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Archives`,
+    nav,
+    errors: null,
+    messagesArray: archMessages
   })
 }
 /* ****************************************
@@ -217,6 +234,24 @@ async function buildViewMessage(req, res, next) {
     errors: null,
     message: message
   })
+}
+/* ****************************************
+*  Mark message as read
+* *************************************** */
+async function messageRead(req, res, next) {
+  const message_id = parseInt(req.params.messId);
+  await accountModel.updateMessageRead(message_id);
+  req.flash("notice", "You have successfully marked a message as read")
+  res.redirect(`/account/messages/${res.locals.accountData.account_id}`)
+}
+/* ****************************************
+*  Archive message
+* *************************************** */
+async function messageArchived(req, res, next) {
+  const message_id = parseInt(req.params.messId);
+  await accountModel.updateMessageArchive(message_id);
+  req.flash("notice", "You have successfully archived a message")
+  res.redirect(`/account/messages/${res.locals.accountData.account_id}`)
 }
 /* ****************************************
 *  Send new message
@@ -323,4 +358,4 @@ async function accountPasswordUpdate(req, res) {
 
 module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, 
   accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage, 
-  getNewMessage, buildViewMessage , buildReplyMessage}
+  getNewMessage, buildViewMessage , buildReplyMessage, messageRead, messageArchived, buildArchivedMessages}

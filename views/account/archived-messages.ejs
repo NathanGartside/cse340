@@ -15,10 +15,7 @@
    </ul>
 <% } %>
 
-<ul>
-    <li><p><a href="/account/send-message">Create New Message</a></p></li>
-    <li><p><a href="/account/view-achived/<%= locals.accountData.account_id %>">View <%= locals.count %> Archived Messages</a></p></li>
-</ul>
+<a href="/account/messages/<%= locals.accountData.account_id %>">Return to Inbox</a>
 
 <table id="messageDisplay" class="messageDisplay">
     <thead>

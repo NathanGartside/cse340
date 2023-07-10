@@ -118,7 +118,30 @@ async function getMessage (message_id) {
     return new Error("No message found")
   }
 }
-
+/* *****************************
+*   Update message as read
+* *************************** */
+async function updateMessageRead(message_id){
+  try {
+      const sql = "UPDATE public.message SET message_read = true WHERE message_id = $1 RETURNING *"
+      const data = await pool.query(sql, [message_id])
+      return data.rows[0]
+  } catch (error) {
+    console.error("Update Error")
+  }
+}
+/* *****************************
+*   Update message as archived
+* *************************** */
+async function updateMessageArchive(message_id){
+  try {
+      const sql = "UPDATE public.message SET message_archived = true WHERE message_id = $1 RETURNING *"
+      const data = await pool.query(sql, [message_id])
+      return data.rows[0]
+  } catch (error) {
+    console.error("Update Error")
+  }
+}
 /* *****************************
 * Return archived messages using messages_to
 * ***************************** */
@@ -147,4 +170,5 @@ async function getMessagesAndName(message_to) {
   }
 }
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updateAccountPassword, newMessage, getUnreadMessages, getArchivedMessages, getMessagesAndName, getMessage}
+module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updateAccountPassword, 
+  newMessage, getUnreadMessages, getArchivedMessages, getMessagesAndName, getMessage, updateMessageRead, updateMessageArchive}
