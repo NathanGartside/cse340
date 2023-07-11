@@ -27,8 +27,10 @@ router.get('/reply-message/:messId', utilities.checkLogin, utilities.handleError
 router.get('/view-message/:messId', utilities.checkLogin, utilities.handleErrors(accountController.buildViewMessage))
 //Route to change message to read
 router.get('/mark-read/:messId', utilities.checkLogin, utilities.handleErrors(accountController.messageRead))
-//Route to change message to read
+//Route to archive message
 router.get('/archive-message/:messId', utilities.checkLogin, utilities.handleErrors(accountController.messageArchived))
+//Route to delete message
+router.get('/delete-message/:messId', utilities.checkLogin, utilities.handleErrors(accountController.messageDelete))
 //Route to send registration info
 router.post('/register', regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount))
 // Process the login attempt

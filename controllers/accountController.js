@@ -161,6 +161,7 @@ async function buildMessages(req, res, next) {
   let nav = await utilities.getNav()
   const message_from = parseInt(req.params.accId);
   const messages = await accountModel.getMessagesAndName(message_from)
+  console.log(messages)
   const archMessages = await accountModel.getArchivedMessages(message_from)
   console.log(archMessages)
   const count = archMessages.length
@@ -251,6 +252,15 @@ async function messageArchived(req, res, next) {
   const message_id = parseInt(req.params.messId);
   await accountModel.updateMessageArchive(message_id);
   req.flash("notice", "You have successfully archived a message")
+  res.redirect(`/account/messages/${res.locals.accountData.account_id}`)
+}
+/* ****************************************
+*  Delete message
+* *************************************** */
+async function messageDelete(req, res, next) {
+  const message_id = parseInt(req.params.messId);
+  await accountModel.deleteMessage(message_id);
+  req.flash("notice", "You have successfully deleted a message")
   res.redirect(`/account/messages/${res.locals.accountData.account_id}`)
 }
 /* ****************************************
@@ -358,4 +368,5 @@ async function accountPasswordUpdate(req, res) {
 
 module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, 
   accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage, 
-  getNewMessage, buildViewMessage , buildReplyMessage, messageRead, messageArchived, buildArchivedMessages}
+  getNewMessage, buildViewMessage , buildReplyMessage, messageRead, messageArchived, buildArchivedMessages, 
+  messageDelete}

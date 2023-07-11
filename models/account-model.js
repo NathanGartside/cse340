@@ -143,6 +143,17 @@ async function updateMessageArchive(message_id){
   }
 }
 /* *****************************
+*   Delete message
+* *************************** */
+async function deleteMessage(message_id){
+  try {
+      const sql = "DELETE FROM public.message WHERE message_id = $1"
+      await pool.query(sql, [message_id])
+  } catch (error) {
+    console.error("Error Deleting Message")
+  }
+}
+/* *****************************
 * Return archived messages using messages_to
 * ***************************** */
 async function getArchivedMessages (message_to) {
@@ -162,7 +173,7 @@ async function getArchivedMessages (message_to) {
 async function getMessagesAndName(message_to) {
   try {
     const result = await pool.query(
-      'SELECT m.*, a.account_firstname AS message_from_firstname, a.account_lastname AS message_from_lastname FROM public.message m LEFT JOIN public.account a ON m.message_from = a.account_id WHERE m.message_to IN ($1)',
+      'SELECT m.*, a.account_firstname AS message_from_firstname, a.account_lastname AS message_from_lastname FROM public.message m LEFT JOIN public.account a ON m.message_from = a.account_id WHERE m.message_to IN ($1) AND m.message_archived = false',
       [message_to])
     return result.rows
   } catch (error) {
@@ -171,4 +182,5 @@ async function getMessagesAndName(message_to) {
 }
 
 module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updateAccountPassword, 
-  newMessage, getUnreadMessages, getArchivedMessages, getMessagesAndName, getMessage, updateMessageRead, updateMessageArchive}
+  newMessage, getUnreadMessages, getArchivedMessages, getMessagesAndName, getMessage, updateMessageRead, updateMessageArchive,
+  deleteMessage}

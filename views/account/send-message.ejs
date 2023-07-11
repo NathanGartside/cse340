@@ -32,7 +32,7 @@
         <% }) %>
     </select><br>
     <label for="message_subject">Subject:</label><br>
-    <input type="text" name="message_subject" id="message_subject" required pattern="^[a-zA-Z ]+$" value="<%= locals.message_subject %>"><br><br>
+    <input type="text" name="message_subject" id="message_subject" required pattern="^[a-zA-Z :0-9]+$" value="<%= locals.message_subject %>"><br><br>
     <label for="message_body">Message:</label><br>
     <textarea name="message_body" id="message_body" rows="10" cols="30" required><%= locals.message_body %></textarea><br><br>
     <input type="hidden" name="message_from" value="<%= locals.message_from %>">
