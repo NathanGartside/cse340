@@ -27,7 +27,7 @@
         </tr>
     </thead>
     <tbody>
-        <% locals.messagesArray.findLast(function (message) { %>
+        <% locals.messagesArray.forEach(function (message) { %>
             <tr>
                 <td><%= message.message_created.toLocaleString('en-US', 'narrow')%></td>
                 <td><a href='/account/view-message/<%= message.message_id %>'><%= message.message_subject %></a></td>
