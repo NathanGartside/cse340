@@ -159,7 +159,7 @@ async function deleteMessage(message_id){
 async function getArchivedMessages (message_to) {
   try {
     const result = await pool.query(
-      'SELECT message_id, message_subject, message_body, message_created, message_to, message_from, message_read, message_archived FROM message WHERE message_to = $1 AND message_archived = true',
+      'SELECT m.*, a.account_firstname AS message_from_firstname, a.account_lastname AS message_from_lastname FROM public.message m LEFT JOIN public.account a ON m.message_from = a.account_id WHERE m.message_to IN ($1) AND m.message_archived = true',
       [message_to])
     return result.rows
   } catch (error) {
