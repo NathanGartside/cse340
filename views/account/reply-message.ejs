@@ -35,6 +35,7 @@
     <label for="message_body">Message:</label><br>
     <textarea name="message_body" id="message_body" rows="10" cols="30" required><%= locals.message_body %></textarea><br><br>
     <input type="hidden" name="message_from" value="<%= locals.message_from %>">
+    <input type="hidden" name="message_old" value="<%= locals.message_old_id %>">
 
     <button type="submit" class="formButton">Send</button>
 </form>

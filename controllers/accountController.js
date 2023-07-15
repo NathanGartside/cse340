@@ -161,9 +161,7 @@ async function buildMessages(req, res, next) {
   let nav = await utilities.getNav()
   const message_from = parseInt(req.params.accId);
   const messages = await accountModel.getMessagesAndName(message_from)
-  console.log(messages)
   const archMessages = await accountModel.getArchivedMessages(message_from)
-  console.log(archMessages)
   const count = archMessages.length
   res.render("account/messages", {
     title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Inbox`,
@@ -219,7 +217,8 @@ async function buildReplyMessage(req, res, next) {
     message_from: message_from,
     message_to: message.message_from,
     message_subject: `RE: ${message.message_subject}`,
-    message_body: `\n\n // Previous Message //\n${message.message_body}`
+    message_body: `\n\n // Previous Message //\n${message.message_body}`,
+    message_old_id: message_id
   })
 }
 /* ****************************************
@@ -229,11 +228,13 @@ async function buildViewMessage(req, res, next) {
   let nav = await utilities.getNav()
   const message_id = parseInt(req.params.messId);
   const message = await accountModel.getMessage(message_id)
+  const sender = await accountModel.getAccountById(message.message_from)
   res.render("account/view-message", {
     title: message.message_subject,
     nav,
     errors: null,
-    message: message
+    message: message,
+    sender_name: `${sender.account_firstname} ${sender.account_lastname}`
   })
 }
 /* ****************************************
@@ -276,7 +277,6 @@ async function getNewMessage(req, res) {
     message_body, 
     message_from
   )
-  console.log('test2')
   if (messageResult) {
     req.flash(
       "notice",
@@ -293,6 +293,34 @@ async function getNewMessage(req, res) {
   }
 }
 
+/* ****************************************
+*  Send reply message
+* *************************************** */
+async function getReplyMessage(req, res) {
+  let nav = await utilities.getNav()
+  const { message_to, message_subject, message_body, message_from, message_old } = req.body
+  const messageResult = await accountModel.newMessage(
+    message_to,
+    message_subject,
+    message_body, 
+    message_from
+  )
+  if (messageResult) {
+    await accountModel.updateMessageArchive(message_old)
+    req.flash(
+      "notice",
+      `Congratulations, you\'ve sent a new message.`
+    )
+    res.redirect(`/account/messages/${message_from}`)
+  } else {
+    req.flash("notice", "Sorry, the  message failed.")
+    res.status(501).render(`/account/messages`, {
+      title: `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname} Inbox`,
+      nav,
+      message_from: message_from
+    })
+  }
+}
 /* ****************************************
 *  Update account info
 * *************************************** */
@@ -333,7 +361,6 @@ async function accountUpdate(req, res) {
 async function accountPasswordUpdate(req, res) {
   let nav = await utilities.getNav()
   const { account_password, account_id } = req.body
-  console.log(account_id)
   // Hash the password before storing
   let hashedPassword
   try {
@@ -369,4 +396,4 @@ async function accountPasswordUpdate(req, res) {
 module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, 
   accountLogout, buildEditAccount, accountUpdate, accountPasswordUpdate, buildMessages, buildNewMessage, 
   getNewMessage, buildViewMessage , buildReplyMessage, messageRead, messageArchived, buildArchivedMessages, 
-  messageDelete}
+  messageDelete, getReplyMessage}

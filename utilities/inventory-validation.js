@@ -45,7 +45,6 @@ validate.inventoryRules = () => {
       body("inv_image")
       .trim()
       .custom((inv_image) => {
-        console.log(inv_image)
         if(inv_image!='/images/vehicles/no-image.png') {
           throw new Error('Please provide a valid image')
         } else {

@@ -22,7 +22,6 @@
     <label for="message_to">To:</label><br>
     <select name="message_to" id="message_to">
         <% let list = [{name:'Admin Manager', value:'15'}, {name:'Happy Employee', value:'14'}, {name:'Basic Client', value:'13'}] %>
-        <% console.log(list) %>
         <% list.forEach(function (option) {%>
             <% if(option.value == locals.message_to) {%>
                 <option value="<%= option.value %>" selected><%= option.name %></option>
